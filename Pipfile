@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "3.2.3"
 selenium = "3.141.0"
+gunicorn = "*"
 
 [dev-packages]
 
