@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from lists.forms import ItemForm
+from lists.forms import ItemForm, ExistingListItemForm
 from lists.models import Item, List
 
 
@@ -13,10 +13,10 @@ def home_page(request):
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
-    form = ItemForm()
+    form = ExistingListItemForm(list_)
 
     if request.method == 'POST':
-        form = ItemForm(data=request.POST)
+        form = ExistingListItemForm(for_list=list_, data=request.POST)
         if form.is_valid():
             form.save(for_list=list_)
             return redirect(list_)
